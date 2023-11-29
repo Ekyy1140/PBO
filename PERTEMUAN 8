@@ -1,0 +1,108 @@
+from prettytable import PrettyTable
+
+class PerpusItem:
+    def __init__(self, judul, subjek):
+        self.judul = judul
+        self.subjek = subjek
+
+    def LokasiPenyimpanan(self):
+        print('Lokasi Penyimpanan: Perpus')
+
+    def info(self):
+        table = PrettyTable()
+        table.field_names = ["Judul", "Subjek"]
+        table.add_row([self.judul, self.subjek])
+        print(table)
+
+    def input_data(self):
+        self.judul = input("Masukkan Judul: ")
+        self.subjek = input("Masukkan Subjek: ")
+
+class Buku(PerpusItem):
+    def __init__(self, judul, subjek, ISBN, Pengarang, jmlHal, ukuran):
+        super().__init__(judul, subjek)
+        self.ISBN = ISBN
+        self.Pengarang = Pengarang
+        self.jmlHal = jmlHal
+        self.ukuran = ukuran
+    
+    def info(self):
+        super().info()
+        table = PrettyTable()
+        table.field_names = ["ISBN", "Pengarang", "Jumlah Halaman", "Ukuran"]
+        table.add_row([self.ISBN, self.Pengarang, self.jmlHal, self.ukuran])
+        print(table)
+
+    def input_data(self):
+        super().input_data()
+        self.ISBN = input("Masukkan ISBN: ")
+        self.Pengarang = input("Masukkan Pengarang: ")
+        self.jmlHal = input("Masukkan Jumlah Halaman: ")
+        self.ukuran = input("Masukkan Ukuran: ")
+
+class Majalah(PerpusItem):
+    def __init__(self, judul, subjek, volume, issue):
+        super().__init__(judul, subjek)
+        self.volume = volume
+        self.issue = issue
+
+    def info(self):
+        super().info()
+        table = PrettyTable()
+        table.field_names = ["Volume", "Issue"]
+        table.add_row([self.volume, self.issue])
+        print(table)
+
+    def input_data(self):
+        super().input_data()
+        self.volume = input("Masukkan Volume: ")
+        self.issue = input("Masukkan Issue: ")
+
+class DVD(PerpusItem):
+    def __init__(self, judul, subjek, aktor, genre):
+        super().__init__(judul, subjek)
+        self.aktor = aktor
+        self.genre = genre
+
+    def info(self):
+        super().info()
+        table = PrettyTable()
+        table.field_names = ["Aktor", "Genre"]
+        table.add_row([self.aktor, self.genre])
+        print(table)
+
+    def input_data(self):
+        super().input_data()
+        self.aktor = input("Masukkan Aktor: ")
+        self.genre = input("Masukkan Genre: ")
+
+class Pengarang(Buku):
+    def __init__(self, ISBN, Pengarang, jmlHal, ukuran, nama):
+        super().__init__(None, None, ISBN, Pengarang, jmlHal, ukuran)
+        self.nama = nama
+
+    def input_data(self):
+        super().input_data()
+        self.nama = input("Masukkan Nama Pengarang: ")
+
+
+print("="*15, "BUKU", "="*15)
+Book = Buku(None, None, None, None, None, None)
+Book.input_data()
+Book.info()
+print("_"*37)
+print("="*15, "MAJALAH", "="*15)
+majalah = Majalah(None, None, None, None)
+majalah.input_data()
+majalah.info()
+print("_"*37)
+print("="*15, "DVD", "="*15)
+dvd = DVD(None, None, None, None)
+dvd.input_data()
+dvd.info()
+print("_"*37)
+print("="*15, "PENGARANG", "="*15)
+pengarang = Pengarang(None, None, None, None, None)
+pengarang.input_data()
+pengarang.info()
+print("_"*37)
