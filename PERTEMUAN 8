@@ -1,4 +1,6 @@
 from prettytable import PrettyTable
+import os
+
 
 class PerpusItem:
     def __init__(self, judul, subjek):
@@ -90,19 +92,16 @@ print("="*15, "BUKU", "="*15)
 Book = Buku(None, None, None, None, None, None)
 Book.input_data()
 Book.info()
-print("_"*37)
 print("="*15, "MAJALAH", "="*15)
 majalah = Majalah(None, None, None, None)
 majalah.input_data()
 majalah.info()
-print("_"*37)
 print("="*15, "DVD", "="*15)
 dvd = DVD(None, None, None, None)
 dvd.input_data()
 dvd.info()
-print("_"*37)
 print("="*15, "PENGARANG", "="*15)
 pengarang = Pengarang(None, None, None, None, None)
 pengarang.input_data()
 pengarang.info()
-print("_"*37)
+
