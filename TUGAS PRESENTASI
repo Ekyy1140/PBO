@@ -1,0 +1,138 @@
+class Sekolah:
+    def __init__(self, nama_sekolah, lokasi):
+        self.nama_sekolah = nama_sekolah
+        self.lokasi = lokasi
+
+    def get_nama_sekolah(self):
+        return self.nama_sekolah
+
+    def set_nama_sekolah(self, nama_sekolah):
+        self.nama_sekolah = nama_sekolah
+
+    def get_lokasi(self):
+        return self.lokasi
+
+    def set_lokasi(self, lokasi):
+        self.lokasi = lokasi
+
+    def show_info(self):
+        return f"{self.nama_sekolah}, {self.lokasi}"
+
+class Murid(Sekolah):
+    def __init__(self, nama, usia, id_murid):
+        super().__init__("", "")
+        self.usia = usia
+        self.id_murid = id_murid
+
+    def get_info_murid(self):
+        return f"ID: {self.id_murid}, Nama: {self.get_nama_sekolah()}, Usia: {self.usia}"
+
+class Pelajaran(Sekolah):
+    def __init__(self, kode_pelajaran, nama_pelajaran):
+        super().__init__("", "")
+        self.kode_pelajaran = kode_pelajaran
+        self.nama_pelajaran = nama_pelajaran
+
+    def get_info_pelajaran(self):
+        return f"Kode Pelajaran: {self.kode_pelajaran}, Nama Pelajaran: {self.nama_pelajaran}"
+
+    def get_kode_pelajaran(self):
+        return self.kode_pelajaran
+
+class Siswa(Murid):
+    def __init__(self, nama, usia, id_siswa, nilai):
+        super().__init__(nama, usia, id_siswa)
+        self.nilai = nilai
+
+    def get_id_siswa(self):
+        return self.id_murid
+
+    def __repr__(self):
+        return f"Siswa(Nama: {self.get_nama_sekolah()}, Usia: {self.usia}, Nilai: {self.nilai})"
+
+class Guru(Pelajaran):
+    def __init__(self, nama, usia, id_guru, mata_pelajaran):
+        super().__init__("", "")
+        self.nama = nama
+        self.usia = usia
+        self.id_guru = id_guru
+        self.mata_pelajaran_diajar = mata_pelajaran
+
+    def get_info_guru(self):
+        return f"ID Guru: {self.id_guru}, Nama: {self.get_nama_sekolah()}, Usia: {self.usia}, Mata Pelajaran Diajar: {self.mata_pelajaran_diajar}"
+
+try:
+    sekolah = Sekolah("SMA Negeri 1 Jakarta", "Jakarta Pusat")
+
+    def input_data_siswa():
+        nama_siswa = input("Masukkan nama siswa: ")
+        usia_siswa = int(input("Masukkan usia siswa: "))
+
+        while usia_siswa <= 0:
+            print("Usia harus merupakan angka bulat positif.")
+            usia_siswa = int(input("Masukkan usia siswa: "))
+
+        id_siswa = input("Masukkan ID siswa: ")
+        nilai_siswa = int(input("Masukkan nilai siswa: "))
+
+        return Siswa(nama_siswa, usia_siswa, id_siswa, nilai_siswa)
+
+    siswa = input_data_siswa()
+    jurusan = "IPA" if siswa.nilai > 75 else "IPS"
+
+    print(f"Jurusan yang diambil oleh {siswa.get_nama_sekolah()} adalah {jurusan}.")
+
+    print("\nInformasi Sekolah:")
+    print(sekolah.show_info())
+
+    print("\nInformasi Pelajaran:")
+    if jurusan == "IPA":
+        matematika = Pelajaran("M101", "Matematika IPA")
+        fisika = Pelajaran("F101", "Fisika IPA")
+        kimia = Pelajaran("K101", "Kimia IPA")
+        print(matematika.get_info_pelajaran())
+        print(fisika.get_info_pelajaran())
+        print(kimia.get_info_pelajaran())
+    else:
+        ekonomi = Pelajaran("E101", "Ekonomi IPS")
+        sosiologi = Pelajaran("S101", "Sosiologi IPS")
+        sejarah = Pelajaran("S102", "Sejarah IPS")
+        print(ekonomi.get_info_pelajaran())
+        print(sosiologi.get_info_pelajaran())
+        print(sejarah.get_info_pelajaran())
+
+    print("\nInformasi Guru:")
+    list_guru = []
+
+    if jurusan == "IPA":
+        guru_matematika = Guru("Pak haryo", 35, "101", "Matematika IPA")
+        guru_fisika = Guru("Pak suryo", 40, "F101", "Fisika IPA")
+        guru_kimia = Guru("Pak hardi", 25, "K101", "Kimia IPA")
+        
+        list_guru.extend([guru_matematika, guru_fisika, guru_kimia])
+    else:  
+        guru_ekonomi = Guru("Pak yoga", 35, "101", "Ekonomi IPS")
+        guru_sosiologi = Guru("Buk siti", 40, "F101", "Sosiologi IPS")
+        guru_sejarah = Guru("Pak udin", 25, "K101", "Sejarah IPS")
+        
+        list_guru.extend([guru_ekonomi, guru_sosiologi, guru_sejarah])
+
+    for guru in list_guru:
+        print(guru.get_info_guru())
+
+    print("\nInformasi Siswa:")
+    print(siswa)
+
+    if jurusan == "IPA":
+        print(f"\nAkses Privat Kode Pelajaran Matematika: {matematika.get_kode_pelajaran()}")
+        print(f"Akses Privat Kode Pelajaran Fisika: {fisika.get_kode_pelajaran()}")
+        print(f"Akses Privat Kode Pelajaran Kimia: {kimia.get_kode_pelajaran()}")
+        print(f"Akses Privat ID Siswa: {siswa.get_id_siswa()}")
+    else:
+        print(f"\nAkses Privat Kode Pelajaran Ekonomi: {ekonomi.get_kode_pelajaran()}")
+        print(f"Akses Privat Kode Pelajaran Sosiologi: {sosiologi.get_kode_pelajaran()}")
+        print(f"Akses Privat Kode Pelajaran Sejarah: {sejarah.get_kode_pelajaran()}")
+        print(f"Akses Privat ID Siswa: {siswa.get_id_siswa()}")
+
+except Exception as e:
+    print(f"Terjadi kesalahan: {e}")
